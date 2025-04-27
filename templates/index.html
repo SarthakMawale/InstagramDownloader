@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download Instagram videos, reels, and stories in high quality with Bond Instagram Video Downloader">
+    <meta name="keywords" content="Instagram downloader, video downloader, Instagram saver, reel downloader">
+    <meta name="author" content="Bond Downloader">
+    <meta property="og:title" content="Bond Instagram Video Downloader">
+    <meta property="og:description" content="Download Instagram videos in HD quality with one click">
+    <meta property="og:type" content="website">
+    <title>Bond Instagram Video Downloader | Download Reels & Stories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="logo.jpg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+            --primary-pink: #dd2a7b;
+            --text-dark: #262626;
+            --text-light: #8e8e8e;
+            --bg-light: #fafafa;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;         
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--white);
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin-top: 0.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        nav {
+            margin-top: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+        }
+
+        nav a i {
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: var(--white);
+            padding: 2.5rem;
+            margin: 2rem auto;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: var(--shadow);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .download-section h2 {
+            color: var(--primary-pink);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.8rem;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 2px rgba(221, 42, 123, 0.2);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        #message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .message-success {
+            background-color: #e6f7ee;
+            color: #067a4c;
+        }
+
+        .message-error {
+            background-color: #fde8e8;
+            color: #c81e1e;
+        }
+
+        .message-loading {
+            background-color: #e8f4fd;
+            color: #1a73e8;
+        }
+
+        /* Video Player */
+        #videoPlayer {
+            margin-top: 2rem;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .how-it-works h2 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        /* FAQ */
+        .faq {
+            margin: 4rem 0;
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--white);
+        }
+
+        .faq-answer.active {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #aaa;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-pink);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+    
+        /* Default desktop styles (above 768px) */
+nav {
+    display: flex; /* Show desktop nav by default */
+}
+
+.mobile-menu-btn, 
+.mobile-nav, 
+.overlay {
+    display: none; /* Hidden by default */
+}
+
+/* Tablet styles (600px–768px) */
+@media (max-width: 768px) {
+    nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    h1{
+        font-size: 1.2rem;
+    }
+    nav.desktop-nav {
+        display: none;
+    }
+}
+
+/* Mobile styles (below 600px) */
+@media (max-width: 600px) {
+    /* Hide desktop nav */
+    nav.desktop-nav {
+        display: none;
+    }
+
+    /* Show menu button */
+    .mobile-menu-btn {
+        display: block;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+    }
+
+    /* Sidebar */
+    .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        padding-top: 3rem;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    }
+
+    .mobile-nav.active {
+        transform: translateX(0%);
+    }
+
+    .mobile-nav a {
+        color: white;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav a:nth-child(-n+3) {
+        background: rgba(255, 255, 255, 0.1);
+        font-weight: bold;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 999;
+        transition: opacity 0.3s ease;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <header >
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="mobile-nav">
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#features"><i class="fas fa-star"></i> Features</a>
+            <a href="#how-it-works"><i class="fas fa-question-circle"></i> How It Works</a>
+            <a href="#faq"><i class="fas fa-info-circle"></i> FAQ</a>
+            <a href="https://sarthakportfolio17.netlify.app/" target="_blank"><i class="fas fa-user"></i> Portfolio</a>
+        </div>
+        
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1>Sarthak Instagram Video Downloader</h1>
+            <p>Download videos, reels, and stories in HD quality with one click</p>
+            <nav>
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#features"><i class="fas fa-star"></i> Features</a>
+                <a href="#how-it-works"><i class="fas fa-question-circle"></i> How It Works</a>
+                <a href="#faq"><i class="fas fa-info-circle"></i> FAQ</a>
+                <a href="https://sarthakportfolio17.netlify.app/" target="_blank"><i class="fas fa-user"></i> Portfolio</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="download-section">
+            <h2><i class="fas fa-download"></i> Download Instagram Videos</h2>
+            <div class="input-group">
+                <i class="fas fa-link"></i>
+                <input type="text" id="urlInput" placeholder="Paste Instagram URL here (e.g., https://www.instagram.com/p/...)" required>
+            </div>
+            <button class="btn" onclick="downloadVideo()">
+                <span id="btnText">Download Now</span>
+                <span id="btnSpinner" class="spinner" style="display:none;"></span>
+            </button>
+            <div id="message"></div>
+            <video id="videoPlayer" controls></video>
+        </section>
+
+        <section id="features" class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Lightning Fast</h3>
+                <p>Download Instagram videos in seconds with our high-speed servers and optimized processing.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-highlighter"></i>
+                </div>
+                <h3>High Quality</h3>
+                <p>Get videos in the highest available quality, up to 4K resolution for IGTV and HD for reels.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>We don't store your downloads or personal data. Your privacy is our priority.</p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <h2>How To Download Instagram Videos</h2>
+            <p>It's simple and takes just a few seconds</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Copy Link</h3>
+                    <p>Copy the Instagram video URL from the app or website</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Paste Here</h3>
+                    <p>Paste the link in the input field above</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download</h3>
+                    <p>Click the download button and save your video</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is this Instagram downloader free to use?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, Bond Instagram Video Downloader is completely free to use. You can download as many videos as you want without any charges or hidden fees.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What types of Instagram content can I download?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our downloader supports all types of Instagram video content including regular posts, Reels, IGTV videos, and Stories. We're constantly updating to support new formats.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is it legal to download Instagram videos?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Downloading videos for personal use is generally acceptable, but you should respect copyright laws and the original creator's rights. Don't repost content without permission.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do I need to install any software?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No installation required! Our downloader works entirely in your web browser on any device - computer, phone, or tablet.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Bond Downloader</h3>
+                <p>The easiest way to save Instagram videos for offline viewing. Fast, free, and no registration required.</p>
+                <div class="social-links">
+                    <a href="https://x.com/SarthakMawale"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/saru_exe/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/SarthakMawale"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sarthak-mawale-827267346/"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">DMCA</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Bond Instagram Video Downloader. All rights reserved. | Made by <i class="fas fa-heart" style="color:var(--primary-pink);"></i> Sarthak Mawale.
+        </div>
+    </footer>
+
+    <script>
+        // Download function with working Flask backend integration
+        async function downloadVideo() {
+    const url = document.getElementById('urlInput').value.trim();
+    const message = document.getElementById('message');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    
+    // Reset UI
+    message.className = '';
+    message.innerHTML = '';
+    videoPlayer.style.display = 'none';
+    
+    if (!url) {
+        showMessage('Please enter a valid Instagram URL', 'error');
+        document.getElementById('urlInput').focus();
+        return;
+    }
+    
+    // Validate Instagram URL pattern
+    if (!url.match(/https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/[a-zA-Z0-9_-]+\/?/)) {
+        showMessage('Please enter a valid Instagram video, reel, or IGTV URL', 'error');
+        return;
+    }
+    
+    // Show loading state
+    btnText.innerText = 'Processing...';
+    btnSpinner.style.display = 'inline-block';
+    
+    try {
+        // Send request to Flask backend
+        const response = await fetch('/download', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url })
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(result.error || 'Failed to download video');
+        }
+        
+        // Show the video player
+        videoPlayer.src = result.video_url;
+        videoPlayer.style.display = 'block';
+        showMessage('Video loaded successfully!', 'success');
+        
+        // Create download button
+        const downloadLink = document.createElement('a');
+        downloadLink.href = result.video_url + '?download=true';  // Add parameter for download
+        downloadLink.className = 'btn pulse';
+        downloadLink.style.marginTop = '10px';
+        downloadLink.innerHTML = '<i class="fas fa-download"></i> Save Video';
+        downloadLink.onclick = (e) => {
+            e.preventDefault();
+            // Force download
+            const anchor = document.createElement('a');
+            anchor.href = result.video_url;
+            anchor.download = result.filename;
+            anchor.click();
+            showMessage('Download started!', 'success');
+        };
+        
+        message.appendChild(document.createElement('br'));
+        message.appendChild(downloadLink);
+        
+    } catch (err) {
+        console.error('Download error:', err);
+        showMessage('Error: ' + err.message, 'error');
+    } finally {
+        // Reset button state
+        btnText.innerText = 'Download Now';
+        btnSpinner.style.display = 'none';
+    }
+}
+
+function showMessage(text, type) {
+    const message = document.getElementById('message');
+    message.innerHTML = text;
+    message.className = 'message-' + type;
+}
+        
+        function createDownloadLink(videoUrl, filename) {
+            const message = document.getElementById('message');
+            const downloadLink = document.createElement('a');
+            downloadLink.href = videoUrl;
+            downloadLink.download = filename;
+            downloadLink.className = 'btn';
+            downloadLink.style.marginTop = '10px';
+            downloadLink.innerHTML = '<i class="fas fa-download"></i> Save Video';
+            message.appendChild(document.createElement('br'));
+            message.appendChild(downloadLink);
+        }
+        
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            answer.classList.toggle('active');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+        
+        // Add animation to download button on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.querySelector('.btn');
+            downloadBtn.classList.add('pulse');
+            
+            // Remove animation after first interaction
+            function handleFirstInteraction() {
+                downloadBtn.classList.remove('pulse');
+                document.removeEventListener('mousedown', handleFirstInteraction);
+                document.removeEventListener('touchstart', handleFirstInteraction);
+            }
+            
+            document.addEventListener('mousedown', handleFirstInteraction);
+            document.addEventListener('touchstart', handleFirstInteraction);
+        });
+
+        // Mobile menu functionality
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const mobileNav = document.querySelector('.mobile-nav');
+const overlay = document.querySelector('.overlay');
+const closeBtn = document.querySelector('.close-btn');
+
+mobileMenuBtn.addEventListener('click', () => {
+    mobileNav.classList.add('active');
+    overlay.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+});
+
+overlay.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+});
+    </script>
+</body>
+</html>
